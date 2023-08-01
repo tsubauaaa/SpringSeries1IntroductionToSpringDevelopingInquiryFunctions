@@ -64,6 +64,19 @@ public class InquiryController {
 		model.addAttribute("title", "Inquiry Form");
 		return "inquiry/form_boot";
 	}
+	
+	@PostMapping("/update")
+	public String update(@Validated InquiryForm inquiryForm,
+			BindingResult result,
+			Model model) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("title", "Inquiry Form");
+			return "inquiry/index_boot";
+		}
+		model.addAttribute("title", "更新フォーム");
+		return "inquiry/form_boot";
+	}
 
 	@PostMapping("/confirm")
 	public String confirm(@Validated InquiryForm inquiryForm,
@@ -94,11 +107,15 @@ public class InquiryController {
 		inquiry.setEmail(inquiryForm.getEmail());
 		inquiry.setContents(inquiryForm.getContents());
 		inquiry.setCreated(LocalDateTime.now());
-		
-		inquiryService.save(inquiry);
-		
-		redirectAttributes.addFlashAttribute("complete", "Registered!");
-		return "redirect:form";
+
+		if(inquiryForm.getId() == 0) {	
+			inquiryService.save(inquiry);
+		} else {
+			inquiry.setId(inquiryForm.getId());			
+			inquiryService.update(inquiry);
+		}
+		redirectAttributes.addFlashAttribute("complete", "Completed!");
+		return "redirect:/inquiry/form";
 	}
 	
 //	@ExceptionHandler(InquiryNotFoundException.class)

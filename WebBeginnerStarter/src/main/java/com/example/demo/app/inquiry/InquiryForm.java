@@ -14,6 +14,16 @@ public class InquiryForm {
 		this.email = email;
 		this.contents = contents;
 	}
+	
+	public InquiryForm(int id, String name, String email, String contents) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.contents = contents;
+	}
+
+	private int id;
 
 	@Size(min = 1, max = 20, message = "Please input 20 characters or less")
 	private String name;
@@ -25,6 +35,10 @@ public class InquiryForm {
 	@NotNull
 	private String contents;
 
+	public int getId() {
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}

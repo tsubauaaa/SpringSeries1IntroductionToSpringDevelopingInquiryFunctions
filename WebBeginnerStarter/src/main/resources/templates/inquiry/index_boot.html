@@ -35,6 +35,7 @@
       <th scope="col">email</th>
       <th scope="col">contents</th>
       <th scope="col">datetime</th>
+      <th scope="col">edit</th>
     </tr>
   </thead>
   <tbody>
@@ -44,6 +45,15 @@
       <td th:text="${inquiry.email}">@mdo</td>
       <td th:text="${inquiry.contents}">Otto</td>
       <td th:text="${inquiry.created}">@mdo</td>
+      <td>
+	      <form method="post" th:action="@{/inquiry/update}" th:object="${inquiryForm}" >
+			  <input type="hidden" name="id" th:value="${inquiry.id}">
+			  <input type="hidden" name="name" th:value="${inquiry.name}">
+			  <input type="hidden" name="email" th:value="${inquiry.email}">
+			  <input type="hidden" name="contents" th:value="${inquiry.contents}">
+			  <input type="submit" class="btn btn-secondary btn-sm" value="更新">
+	      </form>
+      </td>
     </tr>
 
   </tbody>

@@ -26,11 +26,19 @@ public class SampleController {
 		String sql = "SELECT id, name, email "
 				+ "FROM inquiry WHERE id = 1";
 		
+		String sql2 = "SELECT id, name, email "
+				+ "FROM inquiry WHERE id = 2";
+
 		Map<String, Object> map = jdbcTemplate.queryForMap(sql);
-		
+
+		Map<String, Object> map2 = jdbcTemplate.queryForMap(sql2);
+
 		model.addAttribute("name", map.get("name"));
 		model.addAttribute("email", map.get("email"));
 		
+		model.addAttribute("name2", map2.get("name"));
+		model.addAttribute("email2", map2.get("email"));
+
 		model.addAttribute("title", "Inquiry Form");
 		return "test";
 	}
